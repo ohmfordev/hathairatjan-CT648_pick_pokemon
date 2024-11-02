@@ -59,21 +59,16 @@ Dockerfile (ทั้งใน Path ของ backend และ frontend)
 ## 3.1 Clone โปรเจกต์
 - เชื่อมต่อไปยังเซิร์ฟเวอร์ ใช้ SSH เพื่อเข้าถึงเซิร์ฟเวอร์ (เช่น AWS EC2)
 - Clone โปรเจกต์จาก GitHub ลงเซิร์ฟเวอร์ 
-   ```
+  
    git clone https://github.com/ARRUKlib/CT648_Pokamon_Slots.git
-    ```
    
     ```
        cd CT648_pokemon_gashapon/
      ```
 ## 3.2 Build และ Start Services
-    ```
-    sudo docker-compose up
-     ```
+ sudo docker-compose up
      หรือ 
-    ```
-    sudo docker-compose up --build -d
-      ```
+  sudo docker-compose up --build -d
 ## 3.3 เข้าใช้งาน
 - เข้าใช้งานหน้าเว็บโดย URL หรือ IP ของเครื่องที่ให้รัน Frontend: http://localhost:3002
 - Backend: http://localhost:3001
