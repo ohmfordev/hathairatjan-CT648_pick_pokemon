@@ -77,5 +77,5 @@ Dockerfile (ทั้งใน Path ของ backend และ frontend)
   sudo docker-compose up --build -d
  ```
 ## 3.3 เข้าใช้งาน
-- เข้าใช้งานหน้าเว็บโดย URL หรือ IP ของเครื่องที่ให้รัน Frontend: http://localhost:3002
+- เข้าใช้งานหน้าเว็บโดย URL หรือ IP ของเครื่องที่ให้รัน Frontend: http://localhost:3000
 - Backend: http://localhost:3001
