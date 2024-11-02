@@ -1,0 +1,21 @@
+/* styles.css */
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  margin: 10px;
+}
+
+.card img {
+  width: 100px;
+  height: auto;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+}

@@ -1,0 +1,360 @@
+.gashaponMachine {
+  width: 300px;
+  height: auto;
+  position: relative;
+  top: 20px; /* เลื่อนลง 20px */
+}
+
+.egg-grid {
+  display: flex;
+  justify-content: center;
+}
+
+/* กำหนดรูปแบบไข่ */
+.egg {
+  position: relative;
+  width: 350px; /* ปรับขนาดไข่ */
+  height: 370px; /* ปรับขนาดไข่ */
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  margin: 5px; /* ปรับระยะห่างระหว่างไข่ */
+}
+
+.egg:hover {
+  animation: shake 0.5s infinite;
+}
+
+.egg:hover .egg-image {
+  transform: scale(1.05);
+}
+
+.egg-image {
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* ใช้แอนิเมชันเขย่ากับไข่ที่ถูกเลือก */
+.egg.cracking .egg-image {
+  animation: shake 3s infinite;
+}
+
+/* แอนิเมชันซูมเข้า */
+@keyframes zoom-in {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ใช้แอนิเมชันซูมเข้ากับไข่ */
+.egg-image.zoom-in {
+  animation: zoom-in 1s forwards;
+}
+
+.pokemon-modal {
+  top: 50%;
+  left: 50%;
+  background-image: url("../assets/images/Group5.png"); /* เพิ่มรูปภาพพื้นหลัง */
+  background-size: cover; /* ให้รูปภาพเต็มพื้นที่ */
+  background-position: center; /* จัดตำแหน่งรูปภาพไปที่กลาง */
+  transform: translate(-50%, -50%);
+  height: 35vh; /* ให้เต็มความสูงของหน้าจอ */
+  width: 13vw; /* ให้เต็มความกว้างของหน้าจอ */
+
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* เพิ่มเงาให้การ์ด */
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 10;
+  color: black; /* เปลี่ยนสีข้อความเป็นสีขาว */
+  margin-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+}
+
+.pokemon-image {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+.clear-button {
+  position: absolute; /* กำหนดตำแหน่งเป็น absolute */
+  top: 10px; /* ระยะห่างจากขอบด้านบน */
+  right: 10px; /* ระยะห่างจากขอบด้านขวา */
+  padding: 0;
+  background-color: transparent;
+  color: red;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 10; /* วางปุ่มให้อยู่ด้านบนสุด */
+}
+
+.clear-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* เปลี่ยนสีเมื่อ hover */
+}
+
+.clear-button:hover {
+  background-color: darkblue;
+}
+
+/* ปุ่ม Logout */
+.logout-button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  padding: 10 px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5 px;
+}
+
+.welcome-message {
+  font-size: min(70px, 30vw); /* ปรับขนาดตามหน้าจอ */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #e46962;
+
+  /* เพิ่มเอฟเฟกต์ไล่สี */
+  background: linear-gradient(90deg, #b3b3b3, #1e1e1e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* เงาให้กับข้อความ */
+  text-shadow: 2px 2px 5px rgba(255, 169, 20, 0.3);
+
+  animation: fadeIn 2s ease-in-out, pulse 3s infinite;
+}
+
+/* แอนิเมชันเฟดอิน */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* แอนิเมชันเต้นของข้อความ */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* โมดัลประวัติ */
+.history-modal {
+  position: fixed;
+  top: 40px;
+  left: 10px;
+  transform: translate (-50%, -50%);
+  background-color: rgba (0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-history-image {
+  width: min(50px, 10vw);
+}
+
+.history-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.close-button {
+  margin-top: 30px;
+  padding: 10px;
+  background-color: gray;
+  color: white;
+}
+
+/* แอนิเมชันการเขย่าไข่ */
+@keyframes shake {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  10% {
+    transform: translate(-5px, -5px) rotate(-5deg);
+  }
+  20% {
+    transform: translate(5px, 5px) rotate(5deg);
+  }
+  30% {
+    transform: translate(-5px, 5px) rotate(-3deg);
+  }
+  40% {
+    transform: translate(5px, -5px) rotate(3deg);
+  }
+  50% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  60% {
+    transform: translate(-5px, 5px) rotate(-3deg);
+  }
+  70% {
+    transform: translate(5px, -5px) rotate(3deg);
+  }
+  80% {
+    transform: translate(-5px, -5px) rotate(-5deg);
+  }
+  90% {
+    transform: translate(5px, 5px) rotate(5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* แอนิเมชันซูมออกของโปเกมอน */
+@keyframes zoom-out {
+  /* กำหนดแอนิเมชันซูมออก */
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ใช้แอนิเมชันซูมออกกับโปเกมอน */
+.pokemon-modal.zoom-out {
+  animation: zoom-out 0.5s forwards;
+}
+.start-container {
+  /* จัดตำแหน่งปุ่มและตู้กาชาปองให้อยู่ตรงกลาง */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.drop-rates {
+  background-image: url("../assets/images/T1.jpg"); /* เพิ่มรูปภาพพื้นหลัง */
+  background-size: cover; /* ให้รูปภาพเต็มพื้นที่ */
+  background-position: center; /* จัดตำแหน่งรูปภาพไปที่กลาง */
+  background-color: rgba(0, 0, 0, 0.7); /* พื้นหลังสีดำโปร่งแสง */
+  color: white; /* สีข้อความเป็นสีขาว */
+  padding: 10px 10px 30px; /* ลด padding ด้านล่างให้เหลือน้อยลง */
+  border-radius: 5px; /* มุมโค้งมน */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* เงา */
+  margin: 20px 20; /* ระยะห่างด้านบนและด้านล่าง */
+  height: 20vh; /* ให้เต็มความสูงของหน้าจอ */
+  width: 20vw; /* ให้เต็มความกว้างของหน้าจอ */
+  justify-content: center; /* กึ่งกลาง */
+  align-items: center;
+  text-align: center;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+  width: 100vw; /* ให้เต็มความกว้างของหน้าจอ */
+  background-size: cover; /* ปรับภาพพื้นหลังให้ครอบคลุมทั้งหน้า */
+  background-position: center; /* จัดตำแหน่งภาพพื้นหลังให้อยู่ตรงกลาง */
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ปุ่ม Collection */
+.collection-button {
+  position: absolute;
+  top: 40px;
+  left: 40px; /* ตำแหน่งด้านซ้าย */
+  padding: 20px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ปุ่ม Logout */
+.logout-button {
+  position: absolute;
+  top: 40px;
+  right: 40px; /* ตำแหน่งด้านขวา */
+  padding: 20px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.collection-button {
+  background-color: #007bff; /* สีน้ำเงิน */
+  color: white; /* ตัวหนังสือสีขาว */
+}
+
+.collection-button:hover {
+  background-color: #0056b3; /* สีเข้มขึ้นเมื่อ hover */
+}
+
+.logout-button {
+  background-color: #dc3545; /* สีแดง */
+  color: white; /* ตัวหนังสือสีขาว */
+}
+
+.logout-button:hover {
+  background-color: #c82333; /* สีเข้มขึ้นเมื่อ hover */
+}
+
+.consecutive-pulls {
+  background-image: url("../assets/images/Group_2.png"); /* เพิ่มรูปภาพพื้นหลัง */
+  background-size: cover; /* ให้รูปภาพเต็มพื้นที่ */
+  background-position: center; /* จัดตำแหน่งรูปภาพไปที่กลาง */
+  color: white; /* สีข้อความเป็นสีขาว */
+  padding: 50px; /* ระยะห่างภายในกรอบ */
+  border-radius: 10px; /* มุมโค้งมน */
+  margin: 10px 10; /* ระยะห่างด้านบนและด้านล่าง */
+  height: 5vh; /* ให้เต็มความสูงของหน้าจอ */
+  width: 30vw; /* ให้เต็มความกว้างของหน้าจอ */
+  justify-content: center; /* กึ่งกลาง */
+  align-items: center;
+  text-align: center;
+}
+
+.rare-card {
+  border: 2px solid gold; /* ขอบสีทอง */
+  background-color: rgba(255, 223, 0, 0.3); /* พื้นหลังสีเหลืองโปร่งแสง */
+}

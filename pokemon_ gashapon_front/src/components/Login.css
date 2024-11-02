@@ -1,0 +1,40 @@
+.welcome-message {
+  font-size: min(80px); /* ปรับขนาดตามหน้าจอ */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+
+  /* เพิ่มเอฟเฟกต์ไล่สี */
+  background: linear-gradient(200deg, black, white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* เงาให้กับข้อความ */
+  text-shadow: 2px 2px 5px rgba(255, 169, 20, 0.3);
+
+  animation: fadeIn 2s ease-in-out, pulse 3s infinite;
+}
+
+/* แอนิเมชันเฟดอิน */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* แอนิเมชันเต้นของข้อความ */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
