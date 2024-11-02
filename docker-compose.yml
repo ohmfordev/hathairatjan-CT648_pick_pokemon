@@ -14,7 +14,7 @@ services:
   frontend:
     build: ./pokemon_ gashapon_front
     ports:
-      - "3002:3002"  # เปิดพอร์ต frontend สำหรับการเข้าถึงโดยตรง (ถ้าต้องการ)
+      - "3000:3000"  # เปิดพอร์ต frontend สำหรับการเข้าถึงโดยตรง (ถ้าต้องการ)
     networks:
       - frontend
     environment:
