@@ -5,7 +5,7 @@ import "./Collection.css"; // นำเข้าไฟล์ CSS
 
 interface Pokemon {
   pok_name: string;
-  poke_type: string;
+  poke_type_card: string;
   image: string;
 }
 
@@ -43,7 +43,7 @@ const Collection: React.FC = () => {
           {collection.map((pokemon, index) => (
             <tr key={index}>
               <td>{pokemon.pok_name}</td>
-              <td>{pokemon.poke_type}</td>
+              <td>{pokemon.poke_type_card}</td> {/* ใช้ poke_type_card */}
               <td>
                 {pokemon.image ? (
                   <img src={pokemon.image} alt={pokemon.pok_name} width="50" />
