@@ -70,7 +70,9 @@ Dockerfile (ทั้งใน Path ของ backend และ frontend)
  ```
  sudo docker-compose up
   ```
-     หรือ 
+     
+หรือ 
+
   ```
   sudo docker-compose up --build -d
  ```
