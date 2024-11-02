@@ -183,7 +183,7 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
             src={gashaponMachine}
             alt="Gashapon Machine"
             className="gashapon-image"
-            style={{ width: "400px", height: "auto" }}
+            style={{ width: "300px", height: "auto" }}
           />
         </div>
       ) : (
