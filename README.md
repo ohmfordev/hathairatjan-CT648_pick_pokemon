@@ -44,6 +44,34 @@ API ที่พัฒนาขึ้นครอบคลุมทั้งก�
 - ดึงคอลเล็กชันโปเกมอนทั้งหมดของผู้ใช้ที่มีในตาราง user_pokemon และ pokemon พร้อมดึงรูปภาพที่มีอยู่ในตาราง pic_poke มาด้วย เพื่อนำไปแสดงผลในหน้าคอลเล็กชันของผู้ใช้
 #### GET /api/user-pokemon-points
 - ดึงข้อมูล power_up_points ของโปเกมอนที่ผู้ใช้สะสมไว้ โดยใช้ user_id และ pokemon_id เป็นตัวระบุเพื่อให้ผู้ใช้ทราบข้อมูลค่าพลังสะสมของโปเกมอนแต่ละตัว
+  CT648_POKEMON_GASHAPON
+├── pokemon_ gashapon_front             # โฟลเดอร์ของ Frontend
+│   ├── public                          # เก็บไฟล์สาธารณะ เช่น รูปภาพ, ไอคอน
+│   ├── src                             # โฟลเดอร์เก็บซอร์สโค้ดหลักของ Frontend
+│   ├── bun.lockb                       # ไฟล์ lock ของ Bun
+│   ├── bunfig.toml                     # ไฟล์การตั้งค่าสำหรับ Bun
+│   ├── Dockerfile                      # ไฟล์ Docker สำหรับสร้าง image ของ Frontend
+│   ├── package-lock.json               # ไฟล์ lock ของ npm
+│   ├── package.json                    # รายการ dependencies และสคริปต์
+│   ├── README.md                       # ไฟล์อธิบายโปรเจกต์
+│   ├── tsconfig.json                   # ไฟล์ตั้งค่า TypeScript
+│   └── yarn.lock                       # ไฟล์ lock ของ Yarn
+│
+├── pokemon-gashapon-backend            # โฟลเดอร์ของ Backend
+│   ├── .gitignore                      # ระบุไฟล์หรือโฟลเดอร์ที่ไม่ต้องการให้ติดตามใน Git
+│   ├── bun.lockb                       # ไฟล์ lock ของ Bun
+│   ├── Dockerfile                      # ไฟล์ Docker สำหรับสร้าง image ของ Backend
+│   ├── index.ts                        # จุดเริ่มต้นของแอป Backend
+│   ├── package-lock.json               # ไฟล์ lock ของ npm
+│   ├── package.json                    # รายการ dependencies และสคริปต์
+│   ├── README.md                       # ไฟล์อธิบายโปรเจกต์
+│   ├── server.js                       # ไฟล์เซิร์ฟเวอร์หลัก
+│   └── tsconfig.json                   # ไฟล์ตั้งค่า TypeScript
+│
+├── docker-compose.yml                  # ไฟล์กำหนดการทำงานของ services ด้วย Docker Compose
+├── nginx.conf                          # ไฟล์การตั้งค่า Nginx สำหรับ reverse proxy
+└── package.json                        # รายการ dependencies และสคริปต์หลักของโปรเจกต์
+
 ## 3. วิธี Deploy
 ## 3.1 นำโค้ดทั้งหมดขึ้นมาไว้ที่ GitHub
 โดยมีไฟล์ที่นี้มีบทบาทสำคัญในการ จัดการการทำงานและการรันโปรเจกต์ในสภาพแวดล้อมของ Docker ดังนี้
