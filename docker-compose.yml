@@ -12,7 +12,7 @@ services:
       - backend
 
   frontend:
-    build: ./pokemon_ gashapon_front
+    build: ./pokemon_gashapon_front
     ports:
       - "3000:3000"  # เปิดพอร์ต frontend สำหรับการเข้าถึงโดยตรง (ถ้าต้องการ)
     networks:
@@ -21,7 +21,7 @@ services:
       - REACT_APP_BACKEND_URL=http://13.215.67.233:3001  # ชี้ URL ไปยัง backend
 
   backend:
-    build: ./pokemon-gashapon-backend
+    build: ./pokemon_gashapon_backend
     ports:
       - "3001:3001"  # เปิดพอร์ต backend สำหรับการเข้าถึงโดยตรง
     networks:

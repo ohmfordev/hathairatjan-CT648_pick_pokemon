@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Game.css"; // นำเข้าไฟล์ CSS
+import "./Game.css";
 import backgroundImage from "../assets/images/Group1.png";
 import PokemonEgg from "../assets/images/Pokemon.jpg";
 import loadingSound from "../assets/sounds/loadingSound.mp3";
@@ -34,7 +34,22 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
   const [user, setUser] = useState<{ id: string | null }>({ id: null });
   const [dropRates, setDropRates] = useState<{ [key: string]: number }>({});
   const [consecutivePulls, setConsecutivePulls] = useState<number>(0);
-  const [powerUpPoints, setPowerUpPoints] = useState<number>(0); // เพิ่มสถานะสำหรับเก็บคะแนน power-up
+  const [powerUpPoints, setPowerUpPoints] = useState<number>(0);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [volume, setVolume] = useState<number>(0.5); // ตั้งค่าเริ่มต้นเสียงกลาง
+  const [backgroundAudio] = useState(new Audio(loadingSound));
+
+  useEffect(() => {
+    backgroundAudio.loop = true;
+    backgroundAudio.volume = isMuted ? 0 : volume;
+    if (isGameStarted && !isMuted) {
+      backgroundAudio.play().catch((error) => {
+        console.error("Audio play failed:", error);
+      });
+    } else {
+      backgroundAudio.pause();
+    }
+  }, [isGameStarted, isMuted, volume, backgroundAudio]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -62,15 +77,38 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
 
     fetchUserData();
     fetchDropRates();
-  }, [username]);
 
-  // ฟังก์ชันเริ่มเกม
+    return () => {
+      backgroundAudio.pause();
+      backgroundAudio.currentTime = 0;
+    };
+  }, [username, backgroundAudio]);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(event.target.value);
+    setVolume(newVolume);
+    if (newVolume === 0) {
+      setIsMuted(true); // ปิดเสียงถ้าเลื่อนลงไปที่ 0
+    } else {
+      setIsMuted(false); // เปิดเสียงถ้าเลื่อนขึ้นมาอีกครั้ง
+    }
+  };
+
+  const getVolumeIcon = () => {
+    if (isMuted || volume === 0) return "🔇"; // ปิดเสียง
+    if (volume > 0.5) return "🔊"; // เสียงดัง
+    return "🔉"; // เสียงเบา
+  };
+
   const handleMachineClick = () => {
     setIsGameStarted(true);
     setTimeout(() => setIsCracking(false), 500);
   };
 
-  // ฟังก์ชันเมื่อคลิกที่ไข่
   const handleEggClick = async () => {
     if (isCracking || !user.id) return;
 
@@ -108,7 +146,6 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
     }
   };
 
-  // ฟังก์ชันจัดการเมื่อได้รับ Pokemon
   const handlePokemonObtained = async (pokemonId: number) => {
     if (!user.id) {
       console.error("User ID is not available");
@@ -124,7 +161,6 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
       );
       alert(response.data.message);
 
-      // ดึงข้อมูลคะแนน power-up ใหม่
       const pointsResponse = await axios.get(
         `http://13.215.67.233:3001/api/user-pokemon-points?user_id=${user.id}&pokemon_id=${pokemonId}`
       );
@@ -134,23 +170,22 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
     }
   };
 
-  // ฟังก์ชันล้างข้อมูล Pokemon ที่แสดง
   const handleClear = () => {
     setRandomCard(null);
     setShowPokemon(false);
     setIsGameStarted(false);
-    setPowerUpPoints(0); // รีเซ็ตคะแนน power-up เมื่อเคลียร์ข้อมูล
+    setPowerUpPoints(0);
   };
 
-  // ฟังก์ชันสลับการแสดงโมดัลประวัติ
   const toggleHistoryModal = () => {
     setShowHistoryModal(!showHistoryModal);
   };
 
-  // ฟังก์ชันเล่นเสียงเมื่อเมาส์ hover
   const playHoverSound = () => {
-    const audio = new Audio(hoverSound);
-    audio.play();
+    if (!isMuted) {
+      const audio = new Audio(hoverSound);
+      audio.play();
+    }
   };
 
   return (
@@ -163,13 +198,13 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
           className="collection-button"
           onClick={() => navigate("/collection")}
         >
-          {" "}
           View Collection
         </button>
         <button className="logout-button" onClick={onLogout}>
           Logout
         </button>
       </div>
+
       {!isGameStarted ? (
         <div
           className="start-container"
@@ -239,20 +274,38 @@ const Game: React.FC<GameProps> = ({ username, onLogout }) => {
             <p>Power-up Points for this Pokémon: {powerUpPoints}</p>
           </div>
 
-          {/* แสดงคะแนน power-up */}
-          {/* <div className="power-up-points">
-            <p>Power-up Points for this Pokémon: {powerUpPoints}</p>
-          </div> */}
-
           <div className="consecutive-pulls">
             <p>Consecutive Pulls: {consecutivePulls}</p>
           </div>
         </>
       )}
-      <audio autoPlay loop>
-        <source src={loadingSound} type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
+      <div className="volume-control_game">
+        <span
+          onClick={toggleMute}
+          style={{ cursor: "pointer", fontSize: "24px" }}
+        >
+          {getVolumeIcon()}
+        </span>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value={volume}
+          onChange={handleVolumeChange}
+          disabled={isMuted}
+          style={{
+            width: "100px",
+            cursor: "pointer",
+            appearance: "none",
+            backgroundColor: "#ddd",
+            height: "10px",
+            borderRadius: "5px",
+          }}
+        />
+        <span>{Math.round(volume * 100)}%</span> {/* แสดงเปอร์เซ็นต์ของเสียง */}
+        <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
+      </div>
     </div>
   );
 };

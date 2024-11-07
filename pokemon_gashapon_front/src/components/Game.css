@@ -358,3 +358,59 @@
   border: 2px solid gold; /* ขอบสีทอง */
   background-color: rgba(255, 223, 0, 0.3); /* พื้นหลังสีเหลืองโปร่งแสง */
 }
+
+.volume-control_game {
+  position: absolute;
+  bottom: 20px; /* ระยะห่างจากขอบล่าง */
+  right: 20px; /* ระยะห่างจากขอบขวา */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.8); /* สีพื้นหลังโปร่งแสง */
+  padding: 10px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+}
+
+.volume-control_game span {
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.volume-control_game input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-control_game input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-control_game input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-control_game button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
